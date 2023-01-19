@@ -1,4 +1,5 @@
 InceptionResnetV2, which is a pre-trained model has been used for performing binary classification. 
+
 The evaluation metrics on test data are as follows.
 
 | Metric | Value |
@@ -7,6 +8,7 @@ The evaluation metrics on test data are as follows.
 |Recall | 1 |
 |F1     |  0.995 |
 
+Results on the images present in predict folder.
 
 |Image|Prediction|
 | --- | --- |
