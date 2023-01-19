@@ -7,8 +7,8 @@ Original file is located at
     https://colab.research.google.com/drive/1IMnIkzso03eehvJbsZszCoVnrRi8Auqc
 """
 
-from google.colab import drive
-drive.mount('/content/drive/')
+# from google.colab import drive
+# drive.mount('/content/drive/')
 
 import keras
 from keras.models import Sequential
@@ -29,8 +29,8 @@ from keras.optimizers import SGD, Adam, RMSprop
 import tensorflow as tf
 from keras.models import Model
 
-train_data_dir= '/content/drive/MyDrive/LandT/train/'
-val_data_dir= '/content/drive/MyDrive/LandT/valid/'
+train_data_dir= '/Data/train/'
+val_data_dir= '/Data/valid/'
 
 batch_size=64
 
@@ -83,7 +83,7 @@ verbose=1,
 callbacks=[EarlyStopping(patience=10,restore_best_weights=True)])
 
 test_datagen = ImageDataGenerator(rescale=1./255.)
-test_data_dir = '/content/drive/MyDrive/LandT/test/'
+test_data_dir = '/Data/test/'
 
 test_it = test_datagen.flow_from_directory(
     test_data_dir,
@@ -101,7 +101,7 @@ import matplotlib.pyplot as plt
 import cv2
 from google.colab.patches import cv2_imshow
 
-p='/content/drive/MyDrive/LandT/predict/'
+p='/Data/predict/'
 c=0
 for i in os.listdir(p):
   image_path = p+i
