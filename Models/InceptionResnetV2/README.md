@@ -1,4 +1,4 @@
-InceptionV3, which is a pre-trained model has been used for performing binary classification. 
+InceptionResnetV2, which is a pre-trained model has been used for performing binary classification. 
 The evaluation metrics on test data are as follows.
 
 | Metric | Value |
