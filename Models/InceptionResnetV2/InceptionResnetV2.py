@@ -29,8 +29,8 @@ from keras.optimizers import SGD, Adam, RMSprop
 import tensorflow as tf
 from keras.models import Model
 
-train_data_dir= '/Data/train/'
-val_data_dir= '/Data/valid/'
+train_data_dir= 'Data/train/'
+val_data_dir= 'Data/valid/'
 
 batch_size=64
 
@@ -53,14 +53,14 @@ val_it = train_datagen.flow_from_directory(
     subset='validation') # set as validation data
 
 # Your model here ...
-trained_model = InceptionV3(input_shape = [299, 299] + [3], weights='imagenet', include_top=False)
+trained_model = InceptionResNetV2(input_shape = [299, 299] + [3], weights='imagenet', include_top=False)
   
-for layer in trained_model.layers[:229]:
+for layer in trained_model.layers[:777]:
   layer.trainable = False
 
-for layer in trained_model.layers[229:]:
-    layer.trainable = True
-  
+for layer in trained_model.layers[777:]:
+  layer.trainable = True
+
 x = trained_model.output
 x = GlobalAveragePooling2D()(x)
 
@@ -70,7 +70,7 @@ predictions = Dense(1, activation='sigmoid')(x)
 
 # this is the model we will train
 model = Model(inputs = trained_model.input, outputs = predictions)
-model.compile(optimizer=RMSprop(learning_rate =0.0005, decay = 1e-6), loss='binary_crossentropy', metrics=['acc',tf.keras.metrics.Precision(), tf.keras.metrics.Recall()])
+model.compile(optimizer=RMSprop(learning_rate =0.00001, decay = 1e-6), loss='binary_crossentropy', metrics=['acc',tf.keras.metrics.Precision(), tf.keras.metrics.Recall()])
 #model.compile(optimizer=Adam(learning_rate = 0.0005, decay = 1e-6), loss='binary_crossentropy', metrics=['acc',tf.keras.metrics.Precision(), tf.keras.metrics.Recall()])
 
 #model.compile(tf.optimizers.Adam(learning_rate=0.0001, decay=1e-6), loss=CategoricalCrossentropy(), metrics='acc')
@@ -79,12 +79,12 @@ train_it,
 steps_per_epoch = train_it.samples //batch_size,
 validation_data = val_it, 
 validation_steps = val_it.samples // batch_size,
-epochs = 20,
+epochs = 19,
 verbose=1,
 callbacks=[EarlyStopping(patience=10,restore_best_weights=True)])
 
 test_datagen = ImageDataGenerator(rescale=1./255.)
-test_data_dir = '/Data/test/'
+test_data_dir = 'Data/test/'
 
 test_it = test_datagen.flow_from_directory(
     test_data_dir,
@@ -102,7 +102,7 @@ import matplotlib.pyplot as plt
 import cv2
 from google.colab.patches import cv2_imshow
 
-p='/Data/predict/'
+p='Data/predict/'
 c=0
 for i in os.listdir(p):
   image_path = p+i
